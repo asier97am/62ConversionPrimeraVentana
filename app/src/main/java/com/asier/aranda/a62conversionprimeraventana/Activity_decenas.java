@@ -34,50 +34,48 @@ public class Activity_decenas extends AppCompatActivity {
         bt2 = findViewById(R.id.bt2);
 
         tv2 = findViewById(R.id.tv2);
-        et2 = findViewById(R.id.et2);
-        extras = this.getIntent().getExtras();
-        mensaje = extras.getString("centenas");
-        tv2.setText(mensaje);
 
-        my_ActivityResultLauncher=registerForActivityResult(
+        extras = this.getIntent().getExtras();
+        //tv2.setText(mensaje);
+
+        my_ActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()== Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             //ACCIONES CUANDO VA OK
-                            Intent intent_vuelta_unidades=result.getData();
-                            String mensaje_vuelta_unidades = intent_vuelta_unidades.getStringExtra("vuelta_unidades").toString();
-                            Context context = getApplicationContext();
-                            //INDICO DURACION TOAST
-                            int duration= Toast.LENGTH_LONG;
-                            //TOAST
-                            Toast toast=Toast.makeText(context,mensaje_vuelta_unidades,duration);
-                            toast.show();
+                            Intent intent_vuelta_unidades = result.getData();
+                            String unidades = intent_vuelta_unidades.getStringExtra("vuelta_unidades").toString();
+                            et2 = findViewById(R.id.et2);
+                            //String unidades=extras.getString("vuelta_unidades");
+                            String decenas = et2.getText().toString();
 
-                            Intent intent_decenas_to_centenas = new Intent(Activity_decenas.this, Activity_centenas.class);
-                            setResult(RESULT_OK, intent_decenas_to_centenas);
-                            finish();
+                            Intent intent_llamada_decenas = new Intent();
 
-                        }
-                        else if (result.getResultCode()==Activity.RESULT_CANCELED){
+                            String resultado = decenas + unidades;
+                            intent_llamada_decenas.putExtra("decenas_unidades", resultado);
+
+                            setResult(RESULT_OK, intent_llamada_decenas);
+
+                        } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
                             //ACCIONES SI FALLA
-                            String mensaje_vuelta_unidades= "sin mensaje de vuelta";
-                            Context context=getApplicationContext();
+                            String mensaje_vuelta_unidades = "sin mensaje de vuelta";
+                            Context context = getApplicationContext();
                             int duration = Toast.LENGTH_LONG;
                             //TOAST
-                            Toast toast=Toast.makeText(context,mensaje_vuelta_unidades,duration);
+                            Toast toast = Toast.makeText(context, mensaje_vuelta_unidades, duration);
                             toast.show();
                         }
+                        finish();
                     }
                 });
     }
 
     public void siguiente(View view) {
-        et2 = findViewById(R.id.et2);
-        String decenas = et2.getText().toString();
+
         Intent intent_decenas = new Intent(this, Activity_unidades.class);
-        intent_decenas.putExtra("decenas", decenas);
+        //intent_decenas.putExtra("decenas", decenas);
 
         my_ActivityResultLauncher.launch(intent_decenas);
 

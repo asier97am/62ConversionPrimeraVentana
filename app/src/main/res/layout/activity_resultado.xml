@@ -35,4 +35,16 @@
         android:hint="BINARIO"
         app:layout_constraintStart_toStartOf="@+id/btnConvertirBinario"
         app:layout_constraintTop_toBottomOf="@+id/btnConvertirBinario" />
+
+    <Button
+        android:id="@+id/btAvanzar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avanzar"
+        android:onClick="btAvanzar1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBinario"
+        app:layout_constraintVertical_bias="0.09" />
 </androidx.constraintlayout.widget.ConstraintLayout>
