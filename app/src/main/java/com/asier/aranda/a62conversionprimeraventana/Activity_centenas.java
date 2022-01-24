@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -18,7 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Activity_centenas extends AppCompatActivity {
 
     public EditText editText1;
+    TextView tvDatos, tvBinario;
     public Button bt1;
+    Button btnConvertirBinario;
     Bundle extras;
 
     ActivityResultLauncher<Intent> my_ActivityResultLauncher;
@@ -30,6 +33,10 @@ public class Activity_centenas extends AppCompatActivity {
 
         bt1 = findViewById(R.id.bt1);
 
+        btnConvertirBinario = findViewById(R.id.btnConvertirBinario);
+        tvDatos = findViewById(R.id.tvDatos);
+        tvBinario = findViewById(R.id.tvBinario);
+
         //extras = this.getIntent().getExtras();
 
         my_ActivityResultLauncher=registerForActivityResult(
@@ -40,17 +47,24 @@ public class Activity_centenas extends AppCompatActivity {
                         if(result.getResultCode()== Activity.RESULT_OK){
                             //ACCIONES CUANDO VA OK
                             Intent intent_vuelta_decenas=result.getData();
-                            String unidades_decenas = intent_vuelta_decenas.getStringExtra("decenas_unidades").toString();
+                            String decenas = intent_vuelta_decenas.getStringExtra("decenas_vuelta").toString();
+                            String unidades = intent_vuelta_decenas.getStringExtra("unidades_vuelta").toString();
 
                             //String unidades_decenas=extras.getString("decenas_unidades");
                             String centenas= editText1.getText().toString();
 
                             Intent intent_llamada_decenas = new Intent();
 
-                            String resultado=unidades_decenas+centenas;
-                            intent_llamada_decenas.putExtra("centenas_decenas_unidades", resultado);
+                            String resultado=unidades+decenas+centenas;
 
-                            setResult(RESULT_OK, intent_llamada_decenas);
+                            tvDatos.setText(resultado);
+
+                            int numero = Integer.parseInt(resultado);
+
+
+                            String binario = Integer.toBinaryString(numero);
+                            tvBinario.setText(binario);
+
 
 
                         }

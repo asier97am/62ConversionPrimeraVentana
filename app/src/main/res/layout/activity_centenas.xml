@@ -32,6 +32,37 @@
         app:layout_constraintTop_toBottomOf="@+id/editText1" />
 
 
+    <TextView
+        android:id="@+id/tvDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="176dp"
+        android:hint="Datos"
+        app:layout_constraintStart_toStartOf="@+id/btnConvertirBinario"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnConvertirBinario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Convertir a Binario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDatos" />
+
+    <TextView
+        android:id="@+id/tvBinario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:hint="BINARIO"
+        app:layout_constraintStart_toStartOf="@+id/btnConvertirBinario"
+        app:layout_constraintTop_toBottomOf="@+id/btnConvertirBinario" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"

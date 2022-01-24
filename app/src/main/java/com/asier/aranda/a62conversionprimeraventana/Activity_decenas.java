@@ -53,8 +53,9 @@ public class Activity_decenas extends AppCompatActivity {
 
                             Intent intent_llamada_decenas = new Intent();
 
-                            String resultado = decenas + unidades;
-                            intent_llamada_decenas.putExtra("decenas_unidades", resultado);
+//                            String resultado = decenas + unidades;
+                            intent_llamada_decenas.putExtra("decenas_vuelta", decenas);
+                            intent_llamada_decenas.putExtra("unidades_vuelta", unidades);
 
                             setResult(RESULT_OK, intent_llamada_decenas);
 
