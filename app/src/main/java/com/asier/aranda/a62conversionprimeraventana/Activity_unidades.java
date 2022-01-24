@@ -23,9 +23,9 @@ public class Activity_unidades extends AppCompatActivity {
         setContentView(R.layout.activity_unidades);
 
         bt3 = findViewById(R.id.bt3);
-
-        /*tv3 = findViewById(R.id.tv3);
         extras = this.getIntent().getExtras();
+        /*tv3 = findViewById(R.id.tv3);
+
         mensaje = extras.getString("decenas");
         tv3.setText(mensaje);*/
     }

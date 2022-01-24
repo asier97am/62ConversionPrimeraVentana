@@ -44,11 +44,10 @@ public class Activity_decenas extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
-                            //ACCIONES CUANDO VA OK
                             Intent intent_vuelta_unidades = result.getData();
+
                             String unidades = intent_vuelta_unidades.getStringExtra("vuelta_unidades").toString();
                             et2 = findViewById(R.id.et2);
-                            //String unidades=extras.getString("vuelta_unidades");
                             String decenas = et2.getText().toString();
 
                             Intent intent_llamada_decenas = new Intent();
@@ -61,12 +60,11 @@ public class Activity_decenas extends AppCompatActivity {
 
                         } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
                             //ACCIONES SI FALLA
-                            String mensaje_vuelta_unidades = "sin mensaje de vuelta";
-                            Context context = getApplicationContext();
-                            int duration = Toast.LENGTH_LONG;
-                            //TOAST
-                            Toast toast = Toast.makeText(context, mensaje_vuelta_unidades, duration);
-                            toast.show();
+                            String mensaje_vuelta = "";
+                            mensaje_vuelta = "Sin mensaje de vuelta";
+                            Intent my_resultado = new Intent();
+                            my_resultado.putExtra("Numero_vuelta", mensaje_vuelta);
+                            setResult(RESULT_CANCELED, my_resultado);
                         }
                         finish();
                     }

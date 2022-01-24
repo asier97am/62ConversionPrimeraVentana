@@ -18,11 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Activity_centenas extends AppCompatActivity {
 
-    public EditText editText1;
-    TextView tvDatos, tvBinario;
-    public Button bt1;
-    Button btnConvertirBinario;
-    Bundle extras;
+    private EditText editText1;
+
 
     ActivityResultLauncher<Intent> my_ActivityResultLauncher;
 
@@ -31,62 +28,46 @@ public class Activity_centenas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_centenas);
 
-        bt1 = findViewById(R.id.bt1);
-
-        btnConvertirBinario = findViewById(R.id.btnConvertirBinario);
-        tvDatos = findViewById(R.id.tvDatos);
-        tvBinario = findViewById(R.id.tvBinario);
-
-        //extras = this.getIntent().getExtras();
-
-        my_ActivityResultLauncher=registerForActivityResult(
+        my_ActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode()== Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             //ACCIONES CUANDO VA OK
-                            Intent intent_vuelta_decenas=result.getData();
+                            Intent intent_vuelta_decenas = result.getData();
                             String decenas = intent_vuelta_decenas.getStringExtra("decenas_vuelta").toString();
                             String unidades = intent_vuelta_decenas.getStringExtra("unidades_vuelta").toString();
 
-                            //String unidades_decenas=extras.getString("decenas_unidades");
-                            String centenas= editText1.getText().toString();
 
-                            Intent intent_llamada_decenas = new Intent();
+                            String centenas = editText1.getText().toString();
+                            String resultado = unidades + decenas + centenas;
 
-                            String resultado=unidades+decenas+centenas;
-
-                            tvDatos.setText(resultado);
-
-                            int numero = Integer.parseInt(resultado);
-
-
-                            String binario = Integer.toBinaryString(numero);
-                            tvBinario.setText(binario);
-
-
-
-                        }
-                        else if (result.getResultCode()==Activity.RESULT_CANCELED){
-                            //ACCIONES SI FALLA
-                            String mensaje_vuelta_decenas= "sin mensaje de vuelta";
-                            Context context=getApplicationContext();
+                            String mensaje = Integer.toBinaryString(Integer.parseInt(resultado)) + " --> " + resultado;
+                            Context context = getApplicationContext();
                             int duration = Toast.LENGTH_LONG;
-                            //TOAST
-                            Toast toast=Toast.makeText(context,mensaje_vuelta_decenas,duration);
+                            Toast toast = Toast.makeText(context, mensaje, duration);
+                            toast.show();
+
+//                            tvDatos.setText(resultado);
+//
+//                            int numero = Integer.parseInt(resultado);
+//
+//
+//                            String binario = Integer.toBinaryString(numero);
+//                            tvBinario.setText(binario);
+
+
+                        } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                            String mensaje_vuelta = "Sin mensaje de vuelta";
+                            Context context = getApplicationContext();
+                            int duration = Toast.LENGTH_LONG;
+                            Toast toast = Toast.makeText(context, mensaje_vuelta, duration);
                             toast.show();
                         }
-                        finish();
                     }
                 });
     }
-
-    /*@Override
-    protected void onStop(){
-        super.onStop();
-        setResult(RESULT_CANCELED,null);
-    }*/
 
     public void lanzar_actividad(View vista) {
         Intent intent_decenas = new Intent(this, Activity_decenas.class);
